@@ -12,7 +12,7 @@ object Exercise07 extends App {
     ZIO(r => {
       in.map(_.run(r)).partition(_.isLeft) match {
         case (Nil, as) => Right((for (Right(a) <- as) yield a).toList)
-        case (es, _)   => Left((for (Left(s) <- es) yield s).head)
+        case (es, _)   => es.head.map(_ => List.empty)
       }
     })
 
