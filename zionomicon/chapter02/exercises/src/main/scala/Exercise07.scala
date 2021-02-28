@@ -9,12 +9,12 @@ object Exercise07 extends App {
   def collectAll[R, E, A](
       in: Iterable[ZIO[R, E, A]]
   ): ZIO[R, E, List[A]] =
-    ZIO(r => {
+    ZIO(r =>
       in.map(_.run(r)).partition(_.isLeft) match {
         case (Nil, as) => Right((for (Right(a) <- as) yield a).toList)
         case (es, _)   => es.head.map(_ => List.empty)
       }
-    })
+    )
 
   collectAll(
     Iterable(

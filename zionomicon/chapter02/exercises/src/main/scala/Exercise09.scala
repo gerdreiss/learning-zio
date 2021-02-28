@@ -9,14 +9,14 @@ object Exercise09 extends App {
       self: ZIO[R, E1, A],
       that: ZIO[R, E2, A]
   ): ZIO[R, E2, A] =
-    ZIO(r => {
+    ZIO(r =>
       self
         .run(r)
         .fold(
           _ => that.run(r),
           a => Right(a)
         )
-    })
+    )
 
   orElse(
     ZIO[Any, Int, String](_ => Left(0)),
