@@ -1,8 +1,7 @@
-import java.io.IOException
-
 import zio._
+import zio.console._
 
-import console._
+import java.io.IOException
 
 // Using the Console service and recursion,
 // write a function that will repeatedly read input
@@ -20,7 +19,7 @@ object Exercise19 extends App {
       _     <- putStr("Your input: ")
       input <- getStrLn
       _     <- if (acceptInput(input))
-                 putStrLn("OK") *> ZIO.succeed(input)
+                 putStrLn("OK").as(input)
                else
                  putStrLn("Nope, try again") *> readUntil(acceptInput)
     } yield input

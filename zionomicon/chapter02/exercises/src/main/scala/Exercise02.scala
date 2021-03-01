@@ -14,7 +14,7 @@ object Exercise02 extends App {
     finally pw.close
   }
 
-  def writeFileZio(file: String, text: String) =
+  def writeFileZio(file: String, text: String): ZIO[Any, Throwable, Unit] =
     ZIO
       .effectTotal(new PrintWriter(new File(file)))
       .bracket(

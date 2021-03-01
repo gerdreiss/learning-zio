@@ -15,8 +15,8 @@ object Exercise14 extends App {
     ZIO.effectAsync { callback =>
       getCacheValue(
         key,
-        succ => callback(IO.succeed(succ)),
-        err => callback(IO.fail(err))
+        success => callback(IO.succeed(success)),
+        error => callback(IO.fail(error))
       )
     }
 

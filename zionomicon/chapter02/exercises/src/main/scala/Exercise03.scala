@@ -16,7 +16,7 @@ object Exercise03 extends App {
     writeFile(dest, contents)
   }
 
-  def copyFileZio(source: String, dest: String) =
+  def copyFileZio(source: String, dest: String): ZIO[Any, Throwable, Unit] =
     readFileZio(source).flatMap(writeFileZio(dest, _))
 
   override def run(args: List[String]): URIO[ZEnv, ExitCode] =

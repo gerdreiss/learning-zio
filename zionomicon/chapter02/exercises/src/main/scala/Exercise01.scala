@@ -13,7 +13,7 @@ object Exercise01 extends App {
     finally source.close()
   }
 
-  def readFileZio(file: String) =
+  def readFileZio(file: String): ZIO[Any, Throwable, String] =
     ZIO
       .effect(scala.io.Source.fromFile(file))
       .bracket(
