@@ -9,6 +9,8 @@ object Exercise01 extends App {
     failWithMessage("Oops!").exitCode
 
   def failWithMessage(string: String) =
-    ZIO.fail(throw new Error(string))
+    ZIO
+      .effect(throw new Error(string))
+      .catchAll(e => ZIO.effectTotal(e.printStackTrace()))
 
 }
