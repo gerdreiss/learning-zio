@@ -14,9 +14,9 @@ object Exercise14 extends App {
   def getCacheValueZio(key: String): ZIO[Any, Throwable, String] =
     ZIO.effectAsync { callback =>
       getCacheValue(
-        key,
-        success => callback(IO.succeed(success)),
-        error => callback(IO.fail(error))
+        key = key,
+        onSuccess = success => callback(IO.succeed(success)),
+        onFailure = error => callback(IO.fail(error))
       )
     }
 

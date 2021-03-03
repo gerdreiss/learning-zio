@@ -1,4 +1,3 @@
-import scala.collection.View
 // Implement the collectAll function in terms of the toy model of a ZIO
 // effect. The function should return an effect that sequentially collects the
 // results of the specified collection of effects.

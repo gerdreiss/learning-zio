@@ -1,5 +1,4 @@
 import zio._
-import zio.console.putStrLn
 import java.io.PrintWriter
 import java.io.File
 
