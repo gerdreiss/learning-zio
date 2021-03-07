@@ -1,8 +1,7 @@
+import Exercise01._
 import zio.NonEmptyChunk
 import zio.ZIO
 import zio.{App => ZIOApp}
-
-import Exercise01._
 
 // Using the following code as a foundation, write a ZIO application that
 // prints out the contents of whatever files are passed into the program as
@@ -13,7 +12,7 @@ object Exercise10 extends ZIOApp {
 
   def run(commandLineArguments: List[String]) =
     commandLineArguments match {
-      case Nil => ZIO.fail(println("No filenames passed")).exitCode
+      case Nil         => ZIO.fail(println("No filenames passed")).exitCode
       case arg :: args =>
         ZIO
           .foreach(NonEmptyChunk.fromIterable(arg, args)) { file =>

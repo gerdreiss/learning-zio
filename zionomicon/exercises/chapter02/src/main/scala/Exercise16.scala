@@ -1,5 +1,7 @@
+import scala.concurrent.ExecutionContext
+import scala.concurrent.Future
+
 import zio._
-import scala.concurrent.{ExecutionContext, Future}
 
 object Exercise16 {
   trait Query

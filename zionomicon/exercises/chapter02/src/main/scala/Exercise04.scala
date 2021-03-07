@@ -14,9 +14,9 @@ object Exercise04 extends App {
 
   override def run(args: List[String]): URIO[ZEnv, ExitCode] =
     (for {
-      _ <- printLine("What is your name?")
+      _    <- printLine("What is your name?")
       name <- readLine
-      _ <- printLine(s"Hello, ${name}!")
+      _    <- printLine(s"Hello, ${name}!")
     } yield ()).exitCode
 
 }

@@ -22,12 +22,12 @@ object Exercise05 extends App {
   override def run(args: List[String]): URIO[ZEnv, ExitCode] =
     (for {
       int <- random
-      _ <- printLine("Guess a number from 1 to 3:")
+      _   <- printLine("Guess a number from 1 to 3:")
       num <- readLine
-      _ <- if (num == int.toString)
-        printLine("You guessed right!")
-      else
-        printLine(s"You guessed wrong, the number was ${int}!")
+      _   <- if (num == int.toString)
+               printLine("You guessed right!")
+             else
+               printLine(s"You guessed wrong, the number was ${int}!")
     } yield ()).exitCode
 
 }

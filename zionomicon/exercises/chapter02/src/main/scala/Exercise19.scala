@@ -1,7 +1,7 @@
+import java.io.IOException
+
 import zio._
 import zio.console._
-
-import java.io.IOException
 
 // Using the Console service and recursion,
 // write a function that will repeatedly read input

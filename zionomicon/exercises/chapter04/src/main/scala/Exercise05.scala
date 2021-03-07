@@ -8,7 +8,7 @@ object Exercise05 extends App {
 
   def ioException[R, A](
       zio: ZIO[R, Throwable, A]
-  ): ZIO[R, java.io.IOException, A] =
+  ): ZIO[R, java.io.IOException, A]                          =
     zio.refineOrDieWith { case e: java.io.IOException => e }(identity)
 
   override def run(args: List[String]): URIO[ZEnv, ExitCode] =
