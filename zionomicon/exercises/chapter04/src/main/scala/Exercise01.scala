@@ -8,7 +8,7 @@ object Exercise01 extends App {
   override def run(args: List[String]): URIO[ZEnv, ExitCode] =
     failWithMessage("Oops!").exitCode
 
-  def failWithMessage(string: String) =
+  def failWithMessage(string: String): UIO[Unit] =
     ZIO
       .effect(throw new Error(string))
       .catchAll(e => ZIO.effectTotal(e.printStackTrace()))

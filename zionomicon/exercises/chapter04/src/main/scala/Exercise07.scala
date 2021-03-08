@@ -20,8 +20,8 @@ object Exercise07 {
     zio.foldM(
       {
         case Left(e)  => ZIO.fail(e)
-        case Right(b) => ZIO.succeed(Right(b))
+        case Right(b) => ZIO.right(b)
       },
-      a => ZIO.succeed(Left(a))
+      a => ZIO.left(a)
     )
 }
