@@ -31,7 +31,7 @@ lazy val chapter04 = (project in file("chapter04"))
 
 lazy val chapter05 = (project in file("chapter05"))
   .settings(
-    name := "chapter04",
+    name := "chapter05",
     libraryDependencies ++=
       Dependencies.zio ++
       Dependencies.doobie ++
@@ -40,10 +40,18 @@ lazy val chapter05 = (project in file("chapter05"))
     testFrameworks += testFramework
   )
 
+lazy val chapter06 = (project in file("chapter06"))
+  .settings(
+    name := "chapter06",
+    libraryDependencies ++= Dependencies.zio,
+    testFrameworks += testFramework
+  )
+
+
 lazy val `zionomicon-exercises` =
   project
     .in(file("."))
-    .aggregate(chapter02, chapter04, chapter05)
+    .aggregate(chapter02, chapter04, chapter05, chapter06)
     .settings(
       name := "zionomicon-exercises"
     )
