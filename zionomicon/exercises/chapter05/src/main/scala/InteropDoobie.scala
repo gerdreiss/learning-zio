@@ -13,16 +13,17 @@ object InteropDoobie {
     for {
       blockingExecutor <- blockingExecutor.toManaged_
       runtime          <- ZIO.runtime[Any].toManaged_
-      transactor       <- HikariTransactor
-                            .newHikariTransactor[Task](
-                              ???,
-                              ???,
-                              ???,
-                              ???,
-                              runtime.platform.executor.asEC,
-                              Blocker.liftExecutionContext(blockingExecutor.asEC)
-                            )
-                            .toManagedZIO
+      transactor       <-
+        HikariTransactor
+          .newHikariTransactor[Task](
+            driverClassName = ???,
+            url = ???,
+            user = ???,
+            pass = ???,
+            connectEC = runtime.platform.executor.asEC,
+            blocker = Blocker.liftExecutionContext(blockingExecutor.asEC)
+          )
+          .toManagedZIO
     } yield transactor
 
   val query: ConnectionIO[Int] =

@@ -1,3 +1,4 @@
+import cats.data.Kleisli
 import org.http4s._
 import org.http4s.dsl.request._
 import org.http4s.implicits._
@@ -14,10 +15,10 @@ object InteropHttp4s {
       Response(Status.Ok).withBody(s"Hello, $name from ZIO on a server!")
     }
 
-  val httpApp                                        =
+  val httpApp: Kleisli[Task, Request[Task], Response[Task]] =
     Router("/" -> helloRoute).orNotFound
 
-  val server: ZManaged[Any, Throwable, Server[Task]] =
+  val server: ZManaged[Any, Throwable, Server[Task]]        =
     ZIO.runtime[Any].toManaged_.flatMap { implicit runtime =>
       BlazeServerBuilder[Task](runtime.platform.executor.asEC)
         .bindHttp(8080, "localhost")
