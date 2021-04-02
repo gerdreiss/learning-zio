@@ -6,7 +6,7 @@ import zio.duration._
 object ZIOExample extends App {
 
   val child: ZIO[Clock with Console, Nothing, Unit] =
-    ZIO.sleep(5.seconds) *> putStrLn("Hello from a child fiber!")
+    putStrLn("Hello from a child fiber!").delay(5.seconds)
 
   val parent: ZIO[Clock with Console, Nothing, Unit] =
     child.fork *> ZIO.sleep(3.seconds) *> putStrLn("Hello from a parent fiber!")
@@ -14,11 +14,11 @@ object ZIOExample extends App {
   val example: ZIO[Clock with Console, Nothing, Unit] =
     for {
       fiber <- parent.fork
-      _ <- ZIO.sleep(1.second)
-      _ <- fiber.interrupt
-      _ <- ZIO.sleep(10.seconds)
+      _     <- ZIO.sleep(1.second)
+      _     <- fiber.interrupt
+      _     <- ZIO.sleep(10.seconds)
     } yield ()
 
-  def run(args: List[String]): zio.URIO[zio.ZEnv,zio.ExitCode] =
+  def run(args: List[String]): zio.URIO[zio.ZEnv, zio.ExitCode] =
     example.exitCode
 }
