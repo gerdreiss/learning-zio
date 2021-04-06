@@ -34,31 +34,28 @@ object Sandbox extends App {
         .map(_.flatten)
     }
 
-  lazy val parFiles: UManaged[(File, File)] =
-    file(".scalafmt.conf").zipPar(file("build.sbt"))
-
   override def run(args: List[String]): URIO[ZEnv, ExitCode] =
     // currentDirFileContent
     //   .flatMap(lines => putStrLn(lines.mkString("\n")))
     //   .exitCode
-    parFiles
-      .use { case (scalafmt, build) =>
-        ZIO
-          .bracket(
-            Task(Source.fromFile(scalafmt)),
-            (scalafmtS: Source) => ZIO.succeed(scalafmtS.close()),
-            (scalafmtS: Source) => Task(scalafmtS.getLines.mkString("\n"))
-          )
-          .zipPar(
-            ZIO.bracket(
-              Task(Source.fromFile(build)),
-              (buildS: Source) => ZIO.succeed(buildS.close()),
-              (buildS: Source) => Task(buildS.getLines.mkString("\n"))
-            )
-          )
+    file(".scalafmt.conf")
+      .zipPar(file("build.sbt"))
+      .zipPar(file("project/build.properties"))
+      .use { case ((scalafmt, buildSbt), buildProps) =>
+        readLines(scalafmt)
+          .zipPar(readLines(buildSbt))
+          .zipPar(readLines(buildProps))
       }
-      .flatMap { case (scalafmt, build) =>
-        putStrLn(scalafmt + "\n" + build)
+      .flatMap { case ((scalafmt, buildSbt), buildProps) =>
+        putStrLn(List(buildProps, buildSbt, scalafmt).mkString("\n\n====\n\n"))
       }
       .exitCode
+
+  private def readLines(file: File) = {
+    ZIO.bracket(
+      Task(Source.fromFile(file)),
+      (buildS: Source) => ZIO.succeed(buildS.close()),
+      (buildS: Source) => Task(buildS.getLines.mkString("\n"))
+    )
+  }
 }
