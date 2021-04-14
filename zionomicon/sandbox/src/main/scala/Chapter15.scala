@@ -1,13 +1,10 @@
-package sandbox
-
-import zio.ZIO._
-import zio._
-import zio.console._
+import zio.console.putStrLn
+import zio.{App, ExitCode, Task, UManaged, URIO, ZEnv, ZIO, ZManaged}
 
 import java.io.File
 import scala.io.Source
 
-object Sandbox extends App {
+object Chapter15 extends App {
 
   lazy val names: List[String] =
     new File(".").list.toList
@@ -22,7 +19,7 @@ object Sandbox extends App {
     files.use { files =>
       Task
         .foreach(files) { file =>
-          ifM(ZIO.succeed(file.isFile))(
+          ZIO.ifM(ZIO.succeed(file.isFile))(
             ZIO.bracket(
               Task(Source.fromFile(file)),
               (source: Source) => ZIO.succeed(source.close()),
