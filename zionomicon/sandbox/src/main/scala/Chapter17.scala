@@ -1,3 +1,0 @@
-object Chapter17 {
-
-}
