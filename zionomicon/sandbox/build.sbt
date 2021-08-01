@@ -10,5 +10,6 @@ lazy val root = (project in file("."))
     name := "sandbox",
     libraryDependencies += zio,
     libraryDependencies += zioStreams,
+    libraryDependencies += zioPrelude,
     libraryDependencies += scalaTest % Test
   )
