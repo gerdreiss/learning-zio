@@ -1,10 +1,10 @@
-import zio.console.putStrLn
-import zio.{App, ExitCode, Task, UManaged, URIO, ZEnv, ZIO, ZManaged}
+import zio.console.*
+import zio.*
 
 import java.io.File
 import scala.io.Source
 
-object Chapter15 extends App {
+object Chapter15 extends App:
 
   lazy val names: List[String] =
     new File(".").list.toList
@@ -55,4 +55,3 @@ object Chapter15 extends App {
       (buildS: Source) => Task(buildS.getLines.mkString("\n"))
     )
   }
-}
