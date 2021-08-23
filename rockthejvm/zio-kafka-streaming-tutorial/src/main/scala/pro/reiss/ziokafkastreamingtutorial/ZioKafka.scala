@@ -2,10 +2,9 @@ package pro.reiss.ziokafkastreamingtutorial
 
 import zio.*
 import json.*
-import kafka.consumer.{ Consumer, ConsumerSettings, Subscription }
+import kafka.consumer.*
 import kafka.serde.Serde
 import zio.stream.ZSink
-import scala.collection.immutable.Stream.cons
 
 object ZioKafka extends App:
 
