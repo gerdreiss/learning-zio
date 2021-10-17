@@ -3,4 +3,7 @@
 ...from
 
 * [Zionomicon](https://www.zionomicon.com/)
-
+* [Rock the JVM](https://www.youtube.com/rockthejvm)
+  * [Learning ZIO Playlist](https://www.youtube.com/watch?v=PaogLRrYo64&list=PLmtsMNDRU0Bzu7NfhTiGK7iCYjcFAYlal)
+* [Scala in the City](https://www.youtube.com/channel/UC3Paf3whkhvbs_ni1amPIeg):
+  * [Happy eyeballs live-coding using ZIO by Adam Warski](https://youtu.be/4gyAoyYwWnI)
