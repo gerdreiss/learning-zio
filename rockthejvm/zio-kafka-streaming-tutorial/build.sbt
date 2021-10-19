@@ -1,7 +1,7 @@
 import Dependencies._
 
 ThisBuild / organization := "pro.reiss"
-ThisBuild / scalaVersion := "3.0.1"
+ThisBuild / scalaVersion := "3.1.0"
 
 ThisBuild / scalacOptions ++=
   Seq(
