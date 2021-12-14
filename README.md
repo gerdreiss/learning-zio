@@ -7,3 +7,6 @@
   * [Learning ZIO Playlist](https://www.youtube.com/watch?v=PaogLRrYo64&list=PLmtsMNDRU0Bzu7NfhTiGK7iCYjcFAYlal)
 * [Scala in the City](https://www.youtube.com/channel/UC3Paf3whkhvbs_ni1amPIeg):
   * [Happy eyeballs live-coding using ZIO by Adam Warski](https://youtu.be/4gyAoyYwWnI)
+* [Ziverge](https://www.youtube.com/channel/UCeIg_PnAoyd1w6y8BelLdiQ)
+  * [Declarative vs Executable Encodings](https://www.youtube.com/watch?v=OD1Yr48-0Js)
+
