@@ -27,7 +27,7 @@ object Parser:
     new:
       override def parse(input: String): Option[(Int, String)] =
         input.span(_.isDigit) match
-          case ("", _) => None
+          case ("", _)        => None
           case (digits, rest) => Some((digits.toInt, rest))
 
   def string(s: String): Parser[String] =

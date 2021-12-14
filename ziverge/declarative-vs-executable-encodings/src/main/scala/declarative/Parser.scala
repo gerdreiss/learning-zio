@@ -8,11 +8,11 @@ sealed trait Parser[+A]:
   self =>
 
   def parse(input: String): Option[A] =
-    var loop = true
-    var remainder = input
+    var loop                       = true
+    var remainder: String          = input
     var currentParser: Parser[Any] = self
-    val stack = mutable.Stack[Any => Parser[Any]]()
-    var result: Option[A] = None
+    val stack                      = mutable.Stack[Any => Parser[Any]]()
+    var result: Option[A]          = None
 
     def done(a: Option[Any]): Unit =
       a match
@@ -23,7 +23,7 @@ sealed trait Parser[+A]:
           else
             val next = stack.pop()
             currentParser = next(value)
-        case None =>
+        case None        =>
           loop = false
           result = None
 
@@ -34,7 +34,7 @@ sealed trait Parser[+A]:
 
         case Parser.IntParser =>
           remainder.span(_.isDigit) match
-            case ("", _) =>
+            case ("", _)        =>
               done(None)
             case (digits, rest) =>
               remainder = rest
@@ -45,7 +45,7 @@ sealed trait Parser[+A]:
             case Some(value) =>
               remainder = remainder.tail
               done(Some(value))
-            case None =>
+            case None        =>
               done(None)
 
         case Parser.StringParser(str) =>
@@ -72,15 +72,13 @@ sealed trait Parser[+A]:
   def separatedBy(parser: Parser[Any]): Parser[List[A]] = ???
 
 object Parser:
-  val int: Parser[Int] = IntParser
+  val int: Parser[Int]                  = IntParser
   def string(s: String): Parser[String] = StringParser(s)
-  def char(c: Char): Parser[Char] = CharParser(c)
-  def succeed[A](a: A): Parser[A] = Succeed(a)
+  def char(c: Char): Parser[Char]       = CharParser(c)
+  def succeed[A](a: A): Parser[A]       = Succeed(a)
 
-  case object IntParser extends Parser[Int]
-  final case class CharParser(char: Char) extends Parser[Char]
-  final case class StringParser(str: String) extends Parser[String]
-  final case class Succeed[+A](a: A) extends Parser[A]
+  case object IntParser                                              extends Parser[Int]
+  final case class CharParser(char: Char)                            extends Parser[Char]
+  final case class StringParser(str: String)                         extends Parser[String]
+  final case class Succeed[+A](a: A)                                 extends Parser[A]
   final case class FlatMap[A, B](self: Parser[A], f: A => Parser[B]) extends Parser[B]
-
-

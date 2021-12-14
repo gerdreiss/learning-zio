@@ -1,4 +1,4 @@
-import declarative.{Coord, Parser}
+import declarative.{ Coord, Parser }
 
 @main def main(): Unit =
   val coord = for
@@ -9,4 +9,3 @@ import declarative.{Coord, Parser}
     _ <- Parser.char(')')
   yield Coord(x, y)
   coord.parse("(12, 30)").foreach(println)
-4
