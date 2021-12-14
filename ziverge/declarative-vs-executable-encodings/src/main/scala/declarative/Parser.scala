@@ -83,12 +83,4 @@ object Parser:
   final case class Succeed[+A](a: A) extends Parser[A]
   final case class FlatMap[A, B](self: Parser[A], f: A => Parser[B]) extends Parser[B]
 
-@main def main(): Unit =
-  val coord = for
-    _ <- Parser.char('(')
-    x <- Parser.int
-    _ <- Parser.string(", ")
-    y <- Parser.int
-    _ <- Parser.char(')')
-  yield Coord(x, y)
-  coord.parse("(1, 30)").foreach(println)
+
