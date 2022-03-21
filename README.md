@@ -9,4 +9,6 @@
   * [Happy eyeballs live-coding using ZIO by Adam Warski](https://youtu.be/4gyAoyYwWnI)
 * [Ziverge](https://www.youtube.com/channel/UCeIg_PnAoyd1w6y8BelLdiQ)
   * [Declarative vs Executable Encodings (basically, free monads vs tagless final)](https://www.youtube.com/watch?v=OD1Yr48-0Js)
+* [Scalac.io](https://scalac.io)
+  * [Introduction to Programming with ZIO Functional Effects](https://scalac.io/blog/introduction-to-programming-with-zio-functional-effects/)
 
