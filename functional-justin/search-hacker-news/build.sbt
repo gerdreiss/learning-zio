@@ -1,9 +1,9 @@
-val scala3Version   = "3.1.1"
+val scala3Version   = "3.1.2"
 val zioVersion      = "2.0.0-RC3"
 val zhttpVersion    = "2.0.0-RC4"
-val sttpVersion     = "3.5.1"
-val zioMagicVersion = "0.3.11"
-val zioJsonVersion  = "0.3.0-RC3"
+val sttpVersion     = "3.5.2"
+val zioMagicVersion = "0.3.12"
+val zioJsonVersion  = "0.3.0-RC8"
 
 lazy val root = project
   .in(file("."))
@@ -24,7 +24,7 @@ lazy val root = project
       "com.softwaremill.sttp.client3" %% "core"                   % sttpVersion,
       "com.softwaremill.sttp.client3" %% "httpclient-backend-zio" % sttpVersion,
       // for nice dates
-      "org.ocpsoft.prettytime"         % "prettytime"             % "5.0.2.Final"
+      "org.ocpsoft.prettytime"         % "prettytime"             % "5.0.3.Final"
       // Embed Li Haoyi's Ammonite repl in your test project because it's cool
       // "com.lihaoyi"                   %% "ammonite"               % "2.5.2-1-fcc95af4"
     ),

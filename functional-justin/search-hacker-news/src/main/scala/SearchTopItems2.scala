@@ -2,13 +2,16 @@ import zio.*
 import sttp.client3.httpclient.zio.*
 import zio.magic.*
 import zio.duration.*
+import java.io.IOException
 
 object SearchTopItems2 extends ZIOAppDefault:
 
   def checkItemForString(search: String, id: Data.HNItemID) =
-    Client.getItem(id) >>= printSearchResult(search)
+    Client.getItem(id).flatMap { item =>
+      printSearchResult(search)(item)
+    }
 
-  def printSearchResult(search: String)(item: Data.HNItem) =
+  def printSearchResult(search: String)(item: Data.HNItem): IO[IOException, Unit] =
     if item.by.toLowerCase.contains(search.toLowerCase) then
       Console.printLine(s"Found in author.\n$item")
     else if item.text.toLowerCase.contains(search.toLowerCase) then
@@ -36,9 +39,6 @@ object SearchTopItems2 extends ZIOAppDefault:
                  }
     yield ()
 
-  val dependencies = Clock.live ++ HttpClientZioBackend.layer() ++ Console.live
-
-  def program(searchTerm: String): ZIO[ZEnv, Throwable, Unit] =
-    app(searchTerm).provideCustomLayer(dependencies)
-
-  def run = program("ukraine")
+  // fails with 'java.lang.NoSuchMethodError: 'zio.ZLayer zio.ZLayer$.fromZIOEnvironment(zio.ZIO, java.lang.Object)'
+  def run = app("ukraine")
+    .provide(HttpClientZioBackend.layer(), Clock.live, Console.live)
