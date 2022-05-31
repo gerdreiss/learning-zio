@@ -1,6 +1,5 @@
 import zio.*
-import zio.console.*
 
-object Main extends App:
-  override def run(args: List[String]): URIO[ZEnv, ExitCode] =
-    putStrLn("Welcome to your first ZIO app!").exitCode
+object Main extends zio.ZIOAppDefault:
+  override def run: ZIO[Environment & (ZIOAppArgs & Scope), Any, Any] =
+    Console.printLine("Welcome to your first ZIO app!").exitCode

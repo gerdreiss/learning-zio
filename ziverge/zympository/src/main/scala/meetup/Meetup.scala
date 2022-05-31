@@ -22,5 +22,5 @@ trait Meetup:
   def createEvent(eventRequest: MeetupRequest): Task[MeetupResponse]
 
 object Meetup:
-  def createEvent(request: MeetupRequest): ZIO[Has[Meetup], Throwable, MeetupResponse] =
-    ZIO.serviceWith(_.createEvent(request))
+  def createEvent(request: MeetupRequest): ZIO[Meetup, Throwable, MeetupResponse] =
+    ZIO.serviceWithZIO[Meetup](_.createEvent(request))

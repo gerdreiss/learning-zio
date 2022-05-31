@@ -3,7 +3,6 @@ package meetup
 import sttp.client3.*
 import sttp.client3.asynchttpclient.zio.SttpClient
 import zio.*
-import zio.duration.*
 import zio.json.*
 
 import java.time.ZonedDateTime
@@ -39,7 +38,7 @@ object EventPostRequest:
       publishStatus = "draft"
     )
 
-final case class MeetupLive(sttp: SttpClient.Service) extends Meetup:
+final case class MeetupLive(sttp: SttpClient) extends Meetup:
 
   val organization = "zio-meetups"
   val newEventUrl  = uri"https://api.meetup.com/$organization/events?"
@@ -59,5 +58,5 @@ final case class MeetupLive(sttp: SttpClient.Service) extends Meetup:
 end MeetupLive
 
 object MeetupLive:
-  val layer: URLayer[Has[SttpClient.Service], Has[Meetup]] =
-    (MeetupLive.apply _).toLayer
+  val layer: URLayer[SttpClient, Meetup] =
+    ZLayer.fromFunction((sttp: SttpClient) => new MeetupLive(sttp))
