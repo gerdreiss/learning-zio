@@ -5,7 +5,7 @@ import zio.*
 final case class ChessCoord(row: Char, col: Int)
 final case class ChessMove(from: ChessCoord, to: ChessCoord)
 final case class ChessGame(moves: List[ChessMove]):
-  override def toString: String = "ChessGame {\n\t" + moves.mkString("\n\t") + "\n}"
+  override def toString: String = s"ChessGame {\n\t${moves.mkString("\n\t")}\n}"
 
 val game = ChessGame(
   List(
