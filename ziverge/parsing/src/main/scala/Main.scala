@@ -27,7 +27,7 @@ val intSyntax    = Syntax.digit.transform(_.asDigit, _.toString.head)
 val spacesSyntax = Syntax.whitespace.repeat.unit(Chunk(' '))
 val arrowSyntax  = spacesSyntax ~ Syntax.string("->", ()) ~ spacesSyntax
 
-val chessCoordSyntax =
+val chessCoordSyntax: Syntax[String, Char, Char, ChessCoord] =
   (charSyntax ~ intSyntax).transform(
     { case (row, col) => ChessCoord(row, col) },
     { case ChessCoord(row, col) => (row, col) }
@@ -57,5 +57,9 @@ object ChessGameParser extends ZIOAppDefault:
   val movePrint  = chessMoveSyntax.print(ChessMove(ChessCoord('A', 1), ChessCoord('A', 2)))
 
   val gameResult = checkGameSyntax.parseString(desc)
+  val gamePrint  = checkGameSyntax.print(game)
 
-  override def run = Console.printLine(desc) *> Console.printLine(gameResult)
+  override def run =
+    Console.printLine(desc) *>
+      Console.printLine(gameResult) *>
+      Console.printLine(gamePrint)
