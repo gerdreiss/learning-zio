@@ -11,6 +11,8 @@
   * [Declarative vs Executable Encodings (basically, free monads vs tagless final)](https://www.youtube.com/watch?v=OD1Yr48-0Js)
 * [Scalac.io](https://scalac.io)
   * [Introduction to Programming with ZIO Functional Effects](https://scalac.io/blog/introduction-to-programming-with-zio-functional-effects/)
-* [ Functional Justin](https://www.youtube.com/channel/UCkLlM1rb1zQcTjZ7HCf2zpg)
+* [Functional Justin](https://www.youtube.com/channel/UCkLlM1rb1zQcTjZ7HCf2zpg)
   * [Search Hacker News with ZIO and magic](https://www.youtube.com/watch?v=3P2Gi--dG9A)
+* [Software Mill](https://softwaremill.com)
+  * [Structuring ZIO 2 applications](https://softwaremill.com/structuring-zio-2-applications/)
 
